@@ -2,19 +2,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: mysql-and-app-ingress
+  name: product-app-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
-    - host: book-app-march.com
+    - host: product-app.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: mysql-and-app-service
+                name: product-app-service
                 port:
                   number: 8081
