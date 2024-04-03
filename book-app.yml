@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-and-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-and-app
+  template:
+    metadata:
+      labels:
+        app: mysql-and-app
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:latest
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: password
+        - name: MYSQL_DATABASE
+          value: master
+        - name: MYSQL_PASSWORD
+          value: password
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: mysql-data
+          mountPath: /var/lib/mysql
+      - name: app
+        image: barryallenat/spring-book-app:latest
+        ports:
+        - containerPort: 8080
+      volumes:
+      - name: mysql-data
+        hostPath:
+          path: /data/mysql02  # Change this path as needed
+          type: DirectoryOrCreate

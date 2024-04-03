@@ -1,0 +1,13 @@
+#this is not used as we are port forwarding
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-and-app-service
+spec:
+  selector:
+    app: mysql-and-app
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 8081    # Port on the service
+      targetPort: 8081  # Port on the pod
