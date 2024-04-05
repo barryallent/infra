@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: product-configmap
+data:
+  AUTH_BEARER_TOKEN: custom_bearer_token
+  MAIL_EMAIL_ID: custom-email@gmail.com

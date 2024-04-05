@@ -28,7 +28,11 @@ spec:
         - name: mysql-data
           mountPath: /var/lib/mysql
       - name: app
-        image: barryallenat/spring-book-app:latest
+        image: barryallenat/spring-product-app:1
+        imagePullPolicy: Always
+        envFrom:
+          - configMapRef:
+              name: product-configmap
         ports:
         - containerPort: 8080
       volumes:

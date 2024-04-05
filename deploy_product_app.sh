@@ -1,4 +1,5 @@
 kubectl delete deploy product-app
+kubectl apply -f ./product-configmap.yml
 kubectl apply -f ./product-deployment.yml
 kubectl apply -f ./product-service.yml
 kubectl apply -f ./product-ingress.yml
