@@ -1,19 +1,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: product-app-ingress
+  name: jenkins-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
-    - host: product-app.com
+    - host: jenkins.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: product-app-service
+                name: jenkins
                 port:
-                  number: 8081
+                  number: 8080

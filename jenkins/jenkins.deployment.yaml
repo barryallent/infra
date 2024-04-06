@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+  labels:
+    app: jenkins
+spec:
+  selector:
+    matchLabels:
+      app: jenkins
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      serviceAccountName: jenkins
+      containers:
+      - name: jenkins
+        image: barryallenat/jenkins:jdk17
+        imagePullPolicy: Always
+        env:
+        - name: JAVA_OPTS
+          value: -Xmx2048m -Dhudson.slaves.NodeProvisioner.MARGIN=50 -Dhudson.slaves.NodeProvisioner.MARGIN0=0.85
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 50000
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /var/jenkins_home
+          name: jenkins
+#        - mountPath: /var/run/docker.sock
+#          name: docker-sock
+#          readOnly: false
+#        - mountPath: "/var/lib/docker"
+#          name: docker-directory
+#          readOnly: false
+      restartPolicy: Always
+      securityContext:
+        runAsUser: 0
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: jenkins
+        persistentVolumeClaim:
+          claimName: jenkins-claim
+#/var/run/docker.sock dont exist on mac, needed to run docker build commands in jenkins
+#      - name: docker-sock
+#        hostPath:
+#          path: "/var/run/docker.sock"
+#          type: File
+#      - name: docker-directory
+#        hostPath:
+#          path: "/var/lib/docker"
