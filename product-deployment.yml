@@ -28,7 +28,7 @@ spec:
         - name: mysql-data
           mountPath: /var/lib/mysql
       - name: app
-        image: barryallenat/spring-product-app:2
+        image: barryallenat/spring-product-app:latest
         imagePullPolicy: Always
         envFrom:
           - configMapRef:
