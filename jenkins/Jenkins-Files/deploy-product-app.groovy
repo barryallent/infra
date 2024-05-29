@@ -5,7 +5,7 @@ pipeline {
         }
     }
     environment {
-        WORKING_DIRECTORY = '/home'
+        WORKING_DIRECTORY = '/home/'
         GIT_CREDENTIALS_ID = 'github-creds'
         DOCKER_PASSWORD = credentials('docker-password')
         ENV = "dev"
