@@ -49,7 +49,7 @@ pipeline {
         stage('Deploy product app') {
             steps {
                 sh '''
-                    cd ${WORKING_DIRECTORY}/infra
+                    cd ${WORKING_DIRECTORY}/infra/product-app
                     kubectl delete deploy product-app
                     kubectl apply -f ./product-configmap.yml
                     kubectl apply -f ./product-deployment.yml
