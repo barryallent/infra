@@ -5,7 +5,7 @@ pipeline {
         }
     }
     environment {
-        WORKING_DIRECTORY = '/home'
+        WORKING_DIRECTORY = '/home/'
         GIT_CREDENTIALS_ID = 'github-creds'
         DOCKER_PASSWORD = credentials('docker-password')
         ENV = "dev"
@@ -49,7 +49,7 @@ pipeline {
         stage('Deploy product app') {
             steps {
                 sh '''
-                    cd ${WORKING_DIRECTORY}/infra
+                    cd ${WORKING_DIRECTORY}/infra/product-app
                     kubectl delete deploy product-app
                     kubectl apply -f ./product-configmap.yml
                     kubectl apply -f ./product-deployment.yml

@@ -1,0 +1,4 @@
+.terraform/
+generated-files/
+.DS_Store
+.idea
